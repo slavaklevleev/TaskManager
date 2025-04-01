@@ -1,0 +1,116 @@
+.focus-widget {
+    background-color: #f0fff0;
+    border-radius: 20px;
+    text-align: center;
+    height: 100%;
+}
+
+.focus-play-btn {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50%;
+    background-color: #6fd26f;
+    color: #103010;
+    border: none;
+    margin-top: 20px;
+}
+
+.focus-play-btn:hover {
+    background-color: #58bd58;
+}
+
+.focus-time-select {
+    margin-top: 20px;
+}
+
+.focus-modal {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.focus-timer {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    text-align: center;
+    font-size: 64px;
+    color: white;
+    z-index: 2;
+}
+
+.focus-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(270deg, #92e6a7, #6fb0f2, #92e6a7);
+    background-size: 600% 600%;
+    z-index: 1;
+}
+
+.end-session-btn {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    padding: 12px 24px;
+}
+
+.focus-select .ant-select-selector {
+  background-color: #D5FEDA !important;
+  border-color: #D5FEDA !important;
+  border-radius: 8px;
+}
+
+.focus-select .ant-select-arrow {
+  color: #333; /* цвет стрелки */
+}
+
+.ocean {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(180deg, #6dd5fa, #2980b9);
+  }
+  
+  .wave {
+    position: absolute;
+    bottom: -15%;
+    width: 200%;
+    height: 45%;
+    background-repeat: repeat-x;
+    background-size: 50% 100%;
+    opacity: 0.5;
+    border-radius: 100% 100% 0 0;
+  }
+  
+  .wave1 {
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.4) 30%, transparent 70%);
+    animation: moveWave 6s ease-in-out infinite alternate,
+               tiltWave 8s ease-in-out infinite;
+  }
+  
+  .wave2 {
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 30%, transparent 70%);
+    animation: moveWave 10s ease-in-out infinite alternate,
+               tiltWave 12s ease-in-out infinite reverse;
+  }
+  
+  .wave3 {
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.2) 30%, transparent 70%);
+    animation: moveWave 14s ease-in-out infinite alternate,
+               tiltWave 16s ease-in-out infinite;
+  }
+  
+  @keyframes moveWave {
+    from { transform: translateX(0); }
+    to { transform: translateX(-5%); }
+  }
+  
+  @keyframes tiltWave {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(7deg); }
+    100% { transform: rotate(0deg); }
+  }

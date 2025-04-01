@@ -1,0 +1,13 @@
+.note-card {
+    width: 350px;
+    height: 350px;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.note-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}

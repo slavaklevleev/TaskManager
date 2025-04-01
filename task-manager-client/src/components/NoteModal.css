@@ -1,0 +1,13 @@
+.note-color-square {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.2s;
+}
+
+.note-color-square.selected {
+  border-color: #000;
+  transform: scale(1.1);
+}

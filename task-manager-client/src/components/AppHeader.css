@@ -1,0 +1,25 @@
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: none;
+    /* border-bottom: 1px solid #f0f0f0;
+    border: 2px solid #5F4AC6; */
+    border-radius: 16px;
+    margin: 0 0px;
+}
+
+.search-bar {
+    border: 2px solid #5F4AC6;
+    border-radius: 16px;
+    width: 100%;
+}
+
+.search-bar .ant-input-group-addon {
+    border: none;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}

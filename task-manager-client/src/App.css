@@ -1,0 +1,37 @@
+.logo {
+  color: white;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 16px 0;
+}
+
+.ant-layout-sider-children {
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: start; /* Центрируем всё содержимое (логотип + меню) по вертикали */
+}
+
+.custom-menu {
+  margin-top: 110px;
+  background: transparent !important; /* прозрачный фон */
+}
+
+.custom-menu .ant-menu-item {
+  text-align: left; /* выравнивание по левому краю */
+  padding-left: 24px; /* можно подстроить отступы */
+  color: white !important; /* белый цвет текста */
+}
+
+.custom-menu .ant-menu-item-selected {
+  background-color: transparent !important; /* лёгкая подсветка фона */
+}
+.custom-menu .ant-menu-item-active {
+  background-color: rgba(255, 255, 0, 0.1) !important; /* прозрачный фон */
+}
+
+.custom-menu .ant-menu-item-selected .ant-menu-title-content,
+.custom-menu .ant-menu-item-selected .anticon {
+  color: #FFD700 !important; /* ярко-жёлтый цвет текста и иконки */
+}

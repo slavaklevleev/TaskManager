@@ -1,0 +1,48 @@
+.todo-item-card {
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+  }
+  
+  .todo-item-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .todo-checkbox {
+    width: 28px;
+    height: 28px;
+    border: 2px solid #d9d9d9;
+    border-radius: 50%;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  
+  .todo-checkbox.checked {
+    background-color: #52c41a;
+    border-color: #52c41a;
+  }
+  
+  .todo-title {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  
+  .todo-deadline {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .completed {
+    text-decoration: line-through;
+    color: #a0a0a0 !important;
+  }
+  
+  .todo-text-block {
+    display: flex;
+    flex-direction: column;
+  }

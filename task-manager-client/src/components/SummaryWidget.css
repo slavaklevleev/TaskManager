@@ -1,0 +1,43 @@
+.summary-widget {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.small-calendar {
+    margin-bottom: 20px;
+}
+
+.summary-buttons {
+    margin-bottom: 20px;
+}
+
+/* Название месяца */
+.small-calendar .ant-picker-calendar-header {
+    color: #5F4AC6;
+    font-weight: bold;
+}
+
+/* Стили для сегодняшнего дня */
+.small-calendar .ant-picker-cell-today .ant-picker-cell-inner::before {
+    border-color: #9A7CFE !important;
+}
+
+/* Цвет текста у сегодняшнего дня */
+.small-calendar .ant-picker-cell-today .ant-picker-cell-inner {
+    background: #9A7CFE !important;
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Активный выбранный день */
+.summary-calendar .ant-picker-cell-selected .ant-picker-cell-inner {
+    background: #5F4AC6 !important;
+    color: white !important;
+    border-radius: 50%;
+    /* для круглой формы */
+    font-weight: 600;
+}

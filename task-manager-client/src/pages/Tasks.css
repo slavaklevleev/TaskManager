@@ -1,0 +1,12 @@
+.kanban-board {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  line-height: 100%;
+  width: 100%;
+}
+
+.kanban-board > div {
+  flex: 1;
+  min-width: 0;
+}

@@ -1,0 +1,186 @@
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-color-square:hover {
+    opacity: 0.8;
+    transform: scale(1.05);
+    transition: all 0.2s;
+}
+
+.calendar-wrapper * {
+    line-height: 100%;
+}
+
+.color-square {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.color-square.selected {
+    border-color: #000;
+    transform: scale(1.1);
+}
+
+.myclassname {
+    color: #000;
+    width: 100%;
+    padding: 4px 6px;
+    border-left-width: 7px;
+    border-left-style: solid;
+    border-radius: 6px;
+    font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.myclassname .fc-event-main {
+    color: #000;
+}
+
+/* 1. Цвет текста заголовка таблицы */
+.fc .fc-toolbar-title {
+    color: #5F4AC6;
+}
+
+/* 2. Стили кнопок */
+.fc .fc-button {
+    background: transparent;
+    border: none;
+    color: #5F4AC6;
+    font-weight: 500;
+    box-shadow: none;
+    transition: all 0.2s;
+}
+
+.fc .fc-button:hover {
+    background: rgba(112, 158, 222, 0.2);
+}
+
+/* Активная кнопка (например, today) */
+.fc .fc-button.fc-button-active,
+.fc .fc-button:focus {
+    background-color: #709EDE !important;
+    color: white;
+    border-radius: 6px;
+}
+
+/* 3. Центровка заголовка (prev/title/next) в строку */
+div:has(> .fc-toolbar-title) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: -20%;
+}
+
+.fc .fc-header-toolbar .fc-toolbar-chunk {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 1. Общий фон и тень */
+.fc .fc-view-harness {
+    background-color: #DDE8F7;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+}
+
+/* 2. Шапка с днями недели — без фона */
+.fc .fc-col-header-cell {
+    background: transparent !important;
+    border: none;
+}
+
+.fc .fc-col-header-cell-cushion {
+    line-height: 350%;
+    color: black !important;
+}
+
+/* 3. Ячейки текущего месяца (белый фон) */
+.fc-daygrid-day.fc-day-today,
+.fc-daygrid-day.fc-day {
+    background-color: white;
+    border-radius: 10px;
+}
+
+.fc-daygrid-day.fc-day-today {
+    background-color: white !important;
+    border: 2px solid purple;
+}
+
+/* 3.1 Ячейки другого месяца — серый фон */
+.fc-daygrid-day.fc-day-other {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    opacity: 0.7;
+}
+
+/* 4. Отступы между ячейками */
+.fc .fc-daygrid-body-natural .fc-daygrid-day {
+    padding: 4px;
+}
+
+/* Сделать отступы между ячейками видимыми */
+.fc .fc-daygrid-day-frame {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 0 4px #DDE8F7;
+    /* имитация gap */
+    background-clip: padding-box;
+}
+
+/* Для дней другого месяца — серый фон + те же отступы */
+.fc .fc-daygrid-day.fc-day-other .fc-daygrid-day-frame {
+    background-color: #f0f0f0;
+    box-shadow: 0 0 0 4px #DDE8F7;
+    opacity: 0.7;
+}
+
+/* Убрать границы между ячейками */
+.fc .fc-scrollgrid td,
+.fc .fc-scrollgrid {
+    border: none !important;
+}
+
+/* Удаляем фон у ячейки, оставляем padding */
+.fc .fc-daygrid-day {
+    background-color: transparent !important;
+    padding: 4px;
+}
+
+/* Внутренний контейнер (fc-daygrid-day-frame) — сам блок дня */
+.fc .fc-daygrid-day-frame {
+    background-color: white;
+    border-radius: 10px;
+    height: 100%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+/* Ячейки другого месяца */
+.fc .fc-daygrid-day.fc-day-other .fc-daygrid-day-frame {
+    background-color: #f0f0f0;
+    opacity: 0.7;
+}
+
+/* Убираем стандартные границы */
+.fc .fc-scrollgrid td,
+.fc .fc-scrollgrid {
+    border: none !important;
+}
+
+.fc .fc-daygrid-day-number {
+    color: black !important;
+}
