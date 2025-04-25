@@ -108,7 +108,7 @@ const Home = () => {
           </Row>
         </Col>
 
-        <Col xs={24} lg={12} xl={6} style={{ height: "100%" }}>
+        <Col xs={24} lg={12} xl={6}>
           <Row gutter={[24, 24]} style={{ height: "100%", margin: 0 }}>
             <SummaryWidget
               onAddTask={() => setShowTaskModal(true)}

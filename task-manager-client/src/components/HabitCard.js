@@ -1,5 +1,15 @@
 import React, { useMemo, useState } from "react";
-import { Card, Typography, Row, Col, Flex, message } from "antd";
+import {
+  Card,
+  Typography,
+  Row,
+  Col,
+  Flex,
+  message,
+  Popconfirm,
+  Button,
+} from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
 import "./HabitCard.css";
 import dayjs from "dayjs";
 import "dayjs/locale/ru";
@@ -17,7 +27,15 @@ const COLORS = {
 
 const weekdayKeys = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
 
-const HabitCard = ({ color, title, streak, schedule, log, onLogUpdate }) => {
+const HabitCard = ({
+  color,
+  title,
+  streak,
+  schedule,
+  log,
+  onLogUpdate,
+  onDelete,
+}) => {
   const [messageApi, contextHolder] = message.useMessage();
   const [habitLog, setHabitLog] = useState(log);
 
@@ -60,9 +78,26 @@ const HabitCard = ({ color, title, streak, schedule, log, onLogUpdate }) => {
     >
       {contextHolder}
       <Flex style={{ marginBottom: 4 }} justify="space-between" align="center">
-        <Title level={4} style={{ margin: "5px" }}>
-          {title}
-        </Title>
+        <Flex justify="start" align="center" style={{ width: "100%" }}>
+          <Title level={4} style={{ margin: "5px" }}>
+            {title}
+          </Title>
+          <Popconfirm
+            title="Вы уверены, что хотите удалить эту привычку?"
+            onConfirm={onDelete}
+            okText="Да"
+            cancelText="Нет"
+            className="delete-task-button"
+          >
+            <Button
+              type="text"
+              danger
+              icon={<DeleteOutlined />}
+              onClick={(e) => e.stopPropagation()} // Не даём всплыть событию
+            />
+          </Popconfirm>
+        </Flex>
+
         <p style={{ display: "block", margin: "5px" }}>{streak} дней подряд</p>
       </Flex>
       <Row gutter={8} justify="space-between">
@@ -81,7 +116,9 @@ const HabitCard = ({ color, title, streak, schedule, log, onLogUpdate }) => {
                   {dayLabel}
                 </Text>
                 <div
-                  className={`habit-circle ${completed ? "completed" : ""} ${enabled ? "habit-circle-enabled" : ""}`}
+                  className={`habit-circle ${completed ? "completed" : ""} ${
+                    enabled ? "habit-circle-enabled" : ""
+                  }`}
                   style={{
                     borderColor: "white",
                     backgroundColor: completed

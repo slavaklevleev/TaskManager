@@ -38,8 +38,6 @@ const AppHeader = () => {
     messageApi.error("Ошибка загрузки профиля");
   }
 
-  console.log(logout, isAuthenticated);
-
   const user = data?.data || { name: "Пользователь", avatarUrl: null };
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -50,8 +48,6 @@ const AppHeader = () => {
   
   const handleSelect = (value, option) => {
     const { type, id } = option;
-
-    console.log(value, option)
 
     switch (type) {
       case "projects":
@@ -133,8 +129,6 @@ const AppHeader = () => {
       return acc;
     }, {})
   );
-
-  console.log(displayOptions);
 
   const handleLogout = () => {
     logout();

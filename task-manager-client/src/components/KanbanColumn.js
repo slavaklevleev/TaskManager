@@ -24,7 +24,6 @@ const KanbanColumn = ({
   onDeleteTask,
   canAdd = true,
 }) => {
-    console.log(tasks)
   return (
     <div className="kanban-column" style={{ backgroundColor: COLORS[columnColors[columnKey]]?.light || "#fff" }}>
       <div className="kanban-column-header">

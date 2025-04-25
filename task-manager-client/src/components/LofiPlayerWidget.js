@@ -1,145 +1,108 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Button, Card, Dropdown, Menu, Slider, Typography } from "antd";
+import React, { useEffect, useState, useRef } from "react";
+import { Button, Card, Dropdown, Menu, Typography } from "antd";
 import {
   PlayCircleFilled,
-  PauseOutlined,
   StepForwardOutlined,
   MoreOutlined,
+  ReloadOutlined,
 } from "@ant-design/icons";
 import "./LofiPlayerWidget.css";
 
 const { Title } = Typography;
 
-const getMotivationQuote = (hour) => {
-  if (hour >= 9 && hour < 12) return "Пора поработать";
-  if (hour >= 12 && hour < 15) return "Сохраняй фокус!";
-  if (hour >= 15 && hour < 18) return "Финишная прямая!";
-  return "Время отдыха";
+const getMotivationQuote = (progress) => {
+  if (progress >= 0.75) return "Начни — это уже половина дела";
+  if (progress >= 0.5) return "Держи фокус, ты на пути";
+  if (progress >= 0.25) return "Половина позади — продолжай!";
+  return "Финишная прямая — не сдавайся!";
 };
-
-const stations = [
-    { name: 'ChillHop', url: 'https://ilovemusic.de/ilovechillhop.m3u' },
-    { name: 'ChillOut Beats', url: 'https://ilovemusic.de/ilovechilloutbeats.m3u' },
-    { name: 'Music&Chill', url: 'https://ilovemusic.de/ilovemusicandchill.m3u' },
-  ];
 
 const LofiPlayerWidget = () => {
   const [time, setTime] = useState(new Date());
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentStationIndex, setCurrentStationIndex] = useState(0);
-  const [volume, setVolume] = useState(0.5);
-  const audioRef = useRef(null);
+  const [timer, setTimer] = useState(25 * 60); // 25 минут в секундах
+  const [isRunning, setIsRunning] = useState(false);
+  const intervalRef = useRef(null);
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.addEventListener('error', (e) => {
-        console.error('Ошибка загрузки потока:', e);
-      });
-    }
+    const timerInterval = setInterval(() => setTime(new Date()), 1000 * 30);
+    return () => clearInterval(timerInterval);
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(() => setTime(new Date()), 1000 * 30);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.src = stations[currentStationIndex].url;
-      audioRef.current.load();
-      if (isPlaying) {
-        audioRef.current.play().catch((e) => console.error(e));
-      }
+    if (isRunning && timer > 0) {
+      intervalRef.current = setInterval(() => {
+        setTimer((prev) => prev - 1);
+      }, 1000);
+    } else {
+      clearInterval(intervalRef.current);
     }
-  }, [currentStationIndex]);
+    return () => clearInterval(intervalRef.current);
+  }, [isRunning]);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
-
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
+  const formatTime = (seconds) => {
+    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return { m, s };
   };
 
-  const nextStation = () => {
-    setCurrentStationIndex((prev) => (prev + 1) % stations.length);
+  const { m: minutes, s: seconds } = formatTime(timer);
+
+  const toggleTimer = () => {
+    setIsRunning((prev) => !prev);
   };
 
-  const handleStationSelect = ({ key }) => {
-    setCurrentStationIndex(Number(key));
-    setIsPlaying(true);
-    setTimeout(() => audioRef.current.play(), 100);
+  const addTime = () => {
+    setTimer((prev) => prev + 5 * 60);
   };
 
+  const resetTimer = () => {
+    setIsRunning(false);
+    setTimer(25 * 60);
+  };
 
   const menu = (
-    <Menu onClick={handleStationSelect}>
-      <Menu.Item disabled style={{ opacity: 0.7 }}>Радиостанции</Menu.Item>
-      {stations.map((station, index) => (
-        <Menu.Item key={index}>{station.name}</Menu.Item>
-      ))}
-      <Menu.Divider />
-      <Menu.Item disabled style={{ opacity: 0.7 }}>Громкость</Menu.Item>
-      <Menu.Item key="volume" disabled>
-        <Slider
-          min={0}
-          max={1}
-          step={0.05}
-          value={volume}
-          onChange={setVolume}
-          style={{ width: 150 }}
-        />
+    <Menu>
+      <Menu.Item icon={<ReloadOutlined />} onClick={resetTimer}>
+        Сбросить таймер
       </Menu.Item>
     </Menu>
   );
 
-  const hours = time.getHours().toString().padStart(2, "0");
-  const minutes = time.getMinutes().toString().padStart(2, "0");
+  const progress = timer / (25 * 60);
+  const quote = getMotivationQuote(progress);
 
   return (
     <Card className="lofi-widget" bodyStyle={{ padding: 20 }}>
       <div className="lofi-grid">
         <div className="time-display">
           <Title level={1} className="clock-text">
-            {hours}
+            {minutes}
           </Title>
           <Title level={1} className="clock-text">
-            {minutes}
+            {seconds}
           </Title>
         </div>
         <div className="right-block">
           <div className="quote-badge">
-            {getMotivationQuote(time.getHours())}
+          {quote}
           </div>
           <div className="player-buttons">
-          <Dropdown overlay={menu} trigger={['click']} placement="topCenter">
+            <Dropdown overlay={menu} trigger={["click"]} placement="topCenter">
               <Button icon={<MoreOutlined />} className="control-btn small" />
             </Dropdown>
             <Button
-              icon={isPlaying ? <PauseOutlined /> : <PlayCircleFilled />}
+              icon={<PlayCircleFilled />}
               className="control-btn big"
-              onClick={togglePlay}
+              onClick={toggleTimer}
             />
             <Button
-              icon={<StepForwardOutlined />}
+              icon={<StepForwardOutlined />} // добавляет 5 минут
               className="control-btn small"
-              onClick={nextStation}
+              onClick={addTime}
             />
           </div>
         </div>
       </div>
-      <audio
-        ref={audioRef}
-      />
     </Card>
   );
 };

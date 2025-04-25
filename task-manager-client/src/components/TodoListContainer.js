@@ -37,7 +37,6 @@ const TodoListContainer = () => {
   const [form] = Form.useForm();
 
   useEffect(() => {
-    console.log('useeffect')
     const handle = (e) => {
       const task = todos.find((t) => t.id === e.detail.id);
       if (task) {
@@ -73,7 +72,6 @@ const TodoListContainer = () => {
   };
 
   const toggleTodo = (todo) => {
-    console.log()
     updateTodo.mutate({ id: todo.id, data: { status: !todo.status } })
   };
 
@@ -123,6 +121,7 @@ const TodoListContainer = () => {
           status={todo.status}
           onToggle={() => toggleTodo(todo)}
           onEdit={() => openEditModal(todo)}
+          onDelete={() => handleDelete(todo.id)}
         />
       ))}
 

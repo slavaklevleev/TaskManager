@@ -101,7 +101,6 @@ const Task = () => {
         (of) => !newFiles.some((nf) => nf.uid === of.id)
       );
 
-      console.log(removedFiles, oldFiles, newFiles);
       for (const file of removedFiles) {
         await deleteFile.mutateAsync(file.id);
       }
@@ -150,7 +149,6 @@ const Task = () => {
 
   if (isLoading) return <p>Загрузка...</p>;
 
-  console.log(viewTask);
   return (
     <>
       {contextHolder}

@@ -20,6 +20,7 @@ import {
   useCreateHabit,
   useHabits,
   useUpdateHabitLog,
+  useDeleteHabit
 } from "../hooks/useHabits";
 
 const { Title, Text } = Typography;
@@ -29,6 +30,7 @@ const Habits = () => {
   const { data: habits = [], isLoading } = useHabits();
   const createHabit = useCreateHabit();
   const updateHabitLog = useUpdateHabitLog();
+  const deleteHabit = useDeleteHabit();
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -40,7 +42,6 @@ const Habits = () => {
   };
 
   const handleLogUpdate = (habitId, date) => {
-    console.log(habitId, date)
     updateHabitLog.mutate({ habitId: habitId, date: date });
   };
 
@@ -81,11 +82,15 @@ const Habits = () => {
                   .map((log) => log.date)}
                 color={habit.color} // можно дополнить, если есть цвет в API
                 onLogUpdate={(date) => {
-                  console.log(habit, date)
                   handleLogUpdate(
                     habit.id,
                     date
                   );
+                }}
+                onDelete={() => {
+                  deleteHabit.mutate(habit.id, {
+                    onSuccess: () => messageApi.success("Привычка удалена"),
+                  });
                 }}
               />
             ))}

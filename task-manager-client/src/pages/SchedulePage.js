@@ -66,7 +66,6 @@ const SchedulePage = () => {
   };
   
   useEffect(() => {
-      console.log('useeffect_schedule')
       const handle = (e) => {
         const event = events.find((event) => event.id == e.detail.id);
         if (event) {
